@@ -269,7 +269,7 @@ function gameOver()
     console.log('inside gameOver');
     stopClock();
     writeModalStats();
-    //toggleModal();
+    toggleModal();
    
     
 }
