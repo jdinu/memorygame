@@ -184,14 +184,25 @@ const seconds = time % 60;
 }
 
 
-function toggleModal()
+/*function toggleModal()
 {
     console.log("Inside toggleModal fn");
     const modal = document.querySelector('.model_background');
     modal.classList.toggle('hide');    
-}
+}*/
 
-function writeModalStats()
+function toggleModal()
+{
+    console.log("Inside toggleModal fn");
+    var modalDlg = document.getElementById("modal");
+    // If "modal_background hide" exist, overwrite it with "modal_background"
+    if (modalDlg.className === "modal_background hide") {
+        modalDlg.className = "modal_background";
+    } else {
+        modalDlg.className = "modal_background hide";
+    }
+}
+/*function writeModalStats()
 {
     const timeStat = document.querySelector('.modal_time');
     const clockTime = document.querySelector('.clock').innerHTML;
@@ -201,7 +212,21 @@ function writeModalStats()
     timeStat.innerHTML = 'Time = ${clockTime}';
     movesStat.innerHTML = 'Moves = ${moves}';
     starsStat.innerHTML ='Stars = ${stars}';    
+}*/
+function writeModalStats()
+{
+    const timeStat = document.querySelector('.modal_time');
+    const clockTime = document.querySelector('.clock').innerHTML;
+    const movesStat = document.querySelector('.modal_moves');
+    const starsStat = document.querySelector('.modal_stars');
+    const stars = getStars();
+    timeStat.innerHTML = 'Time =  '+ clockTime;
+    movesStat.innerHTML = 'Moves ='+ moves;
+    starsStat.innerHTML ='Stars = '+ stars;  
+  
+   
 }
+
 function getStars(){
     stars = document.querySelectorAll('.stars li');
     starCount = 0;
@@ -252,7 +277,6 @@ function checkForMatch(){
         toggleCard(toggledCards[0]);
         toggleCard(toggledCards[1]);
         toggledCards=[];
-      //  matched++;
         }, 1000);
     }
    console.log ("check for match condition is completed");
