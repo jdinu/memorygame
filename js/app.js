@@ -81,6 +81,7 @@ function shuffle(array) {
 //This function will initiate the game,shuffle the cards
 function initGame()
 {
+  matched = 0;
   var deck = document.querySelector('.deck');
   var cardHTML = shuffle(cards).map(function(card){
       return generateCard(card);
@@ -90,16 +91,18 @@ function initGame()
  resetClockAndTime(); 
  resetStars();
 }
-
+//refresh the game
 function resetGame()
 {
     initGame();
 }
 
 function replayGame()
-{
-    resetGame();
+{    
     toggleModal();
+    initGame();
+   // resetGame();
+   
 }
 function resetClockAndTime()
 {
@@ -263,7 +266,7 @@ function checkForMatch(){
    //Compare the number of matched cards with the total pairs to end the game");
     if (matched === TOTAL_PAIRS) 
     {
-    gameOver();
+     gameOver();
     }      
 }
 
