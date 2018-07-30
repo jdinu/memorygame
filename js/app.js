@@ -154,15 +154,15 @@ function addMove()
 function checkScore()
 {    
    //hide the stars based on moves
-    if (moves === 4)
+    if (moves === 10)
     {
          document.getElementById('star1').style.display = 'none'; 
     }
-    else if (moves === 9 )
+    else if (moves === 15 )
     {
         document.getElementById('star2').style.display = 'none'; 
     }
-    else if (moves === 14)
+    else if (moves === 20)
     {
         document.getElementById('star3').style.display = 'none';  
     }
