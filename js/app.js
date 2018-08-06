@@ -56,8 +56,7 @@ document.querySelector('.modal_close').addEventListener('click',closeDialog);
 
 // Functions Start here
 //Dynamically generate the html for the card
-function generateCard(card)
-{
+function generateCard(card){
    return  `<li class="card"><i class="fa ${card}"></i></li>`;
 }
 
@@ -80,8 +79,7 @@ function shuffle(array) {
     return array;
 }
 //This function will initiate the game,shuffle the cards
-function initGame()
-{
+function initGame(){
     matched = 0;
     var deck = document.querySelector('.deck');
     var cardHTML = shuffle(cards).map(function(card){
@@ -93,38 +91,32 @@ function initGame()
     resetStars();
 }
 //refresh the game
-function resetGame()
-{
+function resetGame(){
     initGame();
 }
 //replay the gane
-function replayGame()
-{    
+function replayGame(){    
     toggleModal();
     initGame();   
 }
 //close dialog by 'X'
-function closeDialog()
-{
+function closeDialog(){
     toggleModal();
 }
 //reset the clock
-function resetClockAndTime()
-{
+function resetClockAndTime(){
     stopClock();
     clockOff = true;
     time = 0;
     displayTime();
 }
 //reset the moves
-function resetMoves()
-{
+function resetMoves(){
     moves = 0;
     document.querySelector('.moves').innerHTML = moves; 
 }
 //reset the stars
-function resetStars()
-{
+function resetStars(){
     stars = 0;
     const starList = document.querySelectorAll('.stars li');
     for (star of starList)
@@ -133,8 +125,7 @@ function resetStars()
     }
 }
 //shuffle the deck
-function shuffleDeck()
-{
+function shuffleDeck(){
     const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
     const shuffledCrads = shuffle(cardsToShuffle);
     console.log('Shuffled Cards',shuffledCrads);
@@ -143,16 +134,14 @@ function shuffleDeck()
         deck.appendChild(card);
         }
 }
-// add the no: of moves
-function addMove()
-{
+//add the no: of moves
+function addMove(){
     moves++;
     const movesText = document.querySelector('.moves');
     movesText.innerHTML = moves;
 }
 //check score and hide the stars
-function checkScore()
-{    
+function checkScore(){    
    //hide the stars based on moves
     if (moves === 10)
     {
@@ -168,19 +157,16 @@ function checkScore()
     }
 }
 //start the clock
-function startClock()
-{
+function startClock(){
     clockId = setInterval(() =>{ time++;},1000); 
     console.log(time);
 }
 //stop the clock 
-function stopClock()
-{
+function stopClock(){
     clearInterval(clockId);
 }
 //display Time
-function displayTime()
-{
+function displayTime(){
 const clock = document.querySelector('.clock');
 const minutes = Math.floor(time/60);
 const seconds = time % 60;
@@ -194,8 +180,7 @@ const seconds = time % 60;
     }   
 }
 //toggle the model dialog 
-function toggleModal()
-{
+function toggleModal(){
     console.log("Inside toggleModal fn");
     var modalDlg = document.getElementById("modal");
     // If "modal_background hide" exist, overwrite it with "modal_background"
@@ -206,8 +191,7 @@ function toggleModal()
     }
 }
 //Write the game statitics in to the modal dialog
-function writeModalStats()
-{
+function writeModalStats(){
     const timeStat = document.querySelector('.modal_time');
     const clockTime = document.querySelector('.clock').innerHTML;
     const movesStat = document.querySelector('.modal_moves');
@@ -226,23 +210,21 @@ function getStars(){
             starCount++;
         }
     }
-    console.log(starCount);
+    //console.log(starCount);
     return starCount;
 }
 //toggle the card to show the picture
-function toggleCard(card)
-{
+function toggleCard(card){
  card.classList.toggle('open');
  card.classList.toggle('show');
 }
 //add the toggled card
 function addToggleCard(clickTarget){
     toggledCards.push(clickTarget);
-    console.log(toggledCards);
+    //console.log(toggledCards);
 }
 //validate whether the click on the cards is valid
-function isClickValid(clickTarget)
-{
+function isClickValid(clickTarget){
     return(
     clickTarget.classList.contains('card') &&
     !clickTarget.classList.contains('match') &&
@@ -276,9 +258,7 @@ function checkForMatch(){
     }      
 }
 // game is over - show statistics
-function gameOver()
-{
-    console.log('inside gameOver');
+function gameOver(){    
     stopClock();
     writeModalStats();
     toggleModal();
