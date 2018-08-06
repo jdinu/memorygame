@@ -119,8 +119,7 @@ function resetMoves(){
 function resetStars(){
     stars = 0;
     const starList = document.querySelectorAll('.stars li');
-    for (star of starList)
-    {
+    for (star of starList){
         star.style.display = 'inline';
     }
 }
@@ -129,8 +128,7 @@ function shuffleDeck(){
     const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
     const shuffledCrads = shuffle(cardsToShuffle);
     console.log('Shuffled Cards',shuffledCrads);
-    for (card of shuffledCrads)
-        {
+    for (card of shuffledCrads){
         deck.appendChild(card);
         }
 }
@@ -143,16 +141,13 @@ function addMove(){
 //check score and hide the stars
 function checkScore(){    
    //hide the stars based on moves
-    if (moves === 10)
-    {
+    if (moves === 10){
          document.getElementById('star1').style.display = 'none'; 
     }
-    else if (moves === 15 )
-    {
+    else if (moves === 15 ){
         document.getElementById('star2').style.display = 'none'; 
     }
-    else if (moves === 20)
-    {
+    else if (moves === 20){
         document.getElementById('star3').style.display = 'none';  
     }
 }
@@ -170,12 +165,10 @@ function displayTime(){
 const clock = document.querySelector('.clock');
 const minutes = Math.floor(time/60);
 const seconds = time % 60;
-    if (seconds < 10)
-    {
+    if (seconds < 10){
         clock.innerHTML =`${minutes}:0 ${seconds}` ;    
     }
-    else
-    {
+    else{
        clock.innerHTML =`${minutes}:${seconds}` ;
     }   
 }
@@ -235,16 +228,14 @@ function isClickValid(clickTarget){
 //check whether the toggled cards match
 function checkForMatch(){
     if (toggledCards[0].firstElementChild.className ===
-        toggledCards[1].firstElementChild.className)
-    {
+        toggledCards[1].firstElementChild.className){
         matched++;
         console.log("Matched value is"+ matched);
      toggledCards[0].classList.toggle('match');
      toggledCards[1].classList.toggle('match');
      toggledCards=[];             
     }
-    else
-    {
+    else{
         setTimeout(() => {   
         toggleCard(toggledCards[0]);
         toggleCard(toggledCards[1]);
@@ -252,8 +243,7 @@ function checkForMatch(){
         }, 1000);
     }
    //Compare the number of matched cards with the total pairs to end the game");
-    if (matched === TOTAL_PAIRS) 
-    {
+    if (matched === TOTAL_PAIRS){
      gameOver();
     }      
 }
