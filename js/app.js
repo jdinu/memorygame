@@ -33,11 +33,11 @@ const TOTAL_PAIRS = 8;
 
 initGame();
 // Event Listeners
-deck.addEventListener('click',event => {
+/*deck.addEventListener('click',event => {
     const clickTarget = event.target;
-    if (isClickValid(clickTarget)){
-        startClock(); 
-        displayTime();  
+        if (isClickValid(clickTarget)){
+        //startClock(); 
+       // displayTime();  
         toggleCard(clickTarget); 
         addToggleCard(clickTarget);
     if (toggledCards.length === 2)
@@ -48,9 +48,31 @@ deck.addEventListener('click',event => {
     }
     }
 
-});
-document.querySelector('.modal_replay').addEventListener('click', replayGame);
+});*/
+
+
+function startGame()
+  {
+    const clickTarget = event.target;
+    if (isClickValid(clickTarget)){
+    //startClock(); 
+   // displayTime();  
+    toggleCard(clickTarget); 
+    addToggleCard(clickTarget);
+    if (toggledCards.length === 2) {
+        checkForMatch(clickTarget);     
+        checkScore();
+        addMove();     
+        }
+    }
+  }
+
+
+
+deck.addEventListener('click',startGame);
+document.querySelector('.timer').addEventListener('click',startClock);
 document.querySelector('.restart').addEventListener('click',resetGame);  
+document.querySelector('.modal_replay').addEventListener('click', replayGame);
 document.querySelector('.modal_cancel').addEventListener('click',toggleModal);  
 document.querySelector('.modal_close').addEventListener('click',closeDialog);
 
@@ -80,6 +102,7 @@ function shuffle(array) {
 }
 //This function will initiate the game,shuffle the cards
 function initGame(){
+    startClock();
     matched = 0;
     var deck = document.querySelector('.deck');
     var cardHTML = shuffle(cards).map(function(card){
@@ -96,8 +119,9 @@ function resetGame(){
 }
 //replay the gane
 function replayGame(){    
-    toggleModal();
-    initGame();   
+    toggleModal();   
+    initGame();
+    startClock();   
 }
 //close dialog by 'X'
 function closeDialog(){
@@ -153,7 +177,10 @@ function checkScore(){
 }
 //start the clock
 function startClock(){
-    clockId = setInterval(() =>{ time++;},1000); 
+    time =0;
+    clockId = setInterval(() =>{ time++;
+    displayTime(); 
+    },1000); 
     console.log(time);
 }
 //stop the clock 
@@ -243,13 +270,13 @@ function checkForMatch(){
         }, 1000);
     }
    //Compare the number of matched cards with the total pairs to end the game");
-    if (matched === TOTAL_PAIRS){
+    if (matched === TOTAL_PAIRS){    
      gameOver();
     }      
 }
 // game is over - show statistics
 function gameOver(){    
-    stopClock();
+    stopClock();    
     writeModalStats();
     toggleModal();
 }
