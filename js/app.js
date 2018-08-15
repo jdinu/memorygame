@@ -33,8 +33,20 @@ const TOTAL_PAIRS = 8;
 
 initGame();
 // Event Listeners
-deck.addEventListener('click',startGame);
-document.querySelector('.timer').addEventListener('click',startClock);
+deck.addEventListener('click',event => {
+    const clickTarget = event.target;
+    if (isClickValid(clickTarget)){
+        toggleCard(clickTarget); 
+        addToggleCard(clickTarget);
+        if (toggledCards.length === 2){
+        checkForMatch(clickTarget);     
+        checkScore();
+        addMove();     
+        }
+    }
+
+});
+// Event Listeners
 document.querySelector('.restart').addEventListener('click',resetGame);  
 document.querySelector('.modal_replay').addEventListener('click', replayGame);
 document.querySelector('.modal_cancel').addEventListener('click',toggleModal);  
@@ -65,7 +77,6 @@ function shuffle(array) {
 }
 //This function will initiate the game,shuffle the cards
 function initGame(){
-    startClock();
     matched = 0;
     var deck = document.querySelector('.deck');
     var cardHTML = shuffle(cards).map(function(card){
@@ -75,21 +86,9 @@ function initGame(){
     resetMoves();
     resetClockAndTime(); 
     resetStars();
+    stopClock();
+    startClock();
 }
-// Strat the Game
-function startGame()
-  {
-    const clickTarget = event.target;
-    if (isClickValid(clickTarget)){
-         toggleCard(clickTarget); 
-    addToggleCard(clickTarget);
-    if (toggledCards.length === 2) {
-        checkForMatch(clickTarget);     
-        checkScore();
-        addMove();     
-        }
-    }
-  }
 //refresh the game
 function resetGame(){
     initGame();
@@ -124,15 +123,6 @@ function resetStars(){
         star.style.display = 'inline';
     }
 }
-//shuffle the deck
-/*function shuffleDeck(){
-    const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
-    const shuffledCrads = shuffle(cardsToShuffle);
-    console.log('Shuffled Cards',shuffledCrads);
-    for (let card of shuffledCrads){
-        deck.appendChild(card);
-        }
-}*/
 //add the no: of moves
 function addMove(){
     moves++;
@@ -153,8 +143,7 @@ function checkScore(){
     }
 }
 //start the clock
-function startClock(){
-    //let time =0;
+function startClock(){    
     clockId = setInterval(() =>{ time++;
     displayTime(); 
     },1000); 
