@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-var cards = ['fa-diamond','fa-diamond',
+let cards = ['fa-diamond','fa-diamond',
 'fa-paper-plane-o','fa-paper-plane-o',
 'fa-anchor','fa-anchor',
 'fa-bolt','fa-bolt',
@@ -33,42 +33,6 @@ const TOTAL_PAIRS = 8;
 
 initGame();
 // Event Listeners
-/*deck.addEventListener('click',event => {
-    const clickTarget = event.target;
-        if (isClickValid(clickTarget)){
-        //startClock(); 
-       // displayTime();  
-        toggleCard(clickTarget); 
-        addToggleCard(clickTarget);
-    if (toggledCards.length === 2)
-    {
-     checkForMatch(clickTarget);     
-     checkScore();
-     addMove();     
-    }
-    }
-
-});*/
-
-
-function startGame()
-  {
-    const clickTarget = event.target;
-    if (isClickValid(clickTarget)){
-    //startClock(); 
-   // displayTime();  
-    toggleCard(clickTarget); 
-    addToggleCard(clickTarget);
-    if (toggledCards.length === 2) {
-        checkForMatch(clickTarget);     
-        checkScore();
-        addMove();     
-        }
-    }
-  }
-
-
-
 deck.addEventListener('click',startGame);
 document.querySelector('.timer').addEventListener('click',startClock);
 document.querySelector('.restart').addEventListener('click',resetGame);  
@@ -81,7 +45,6 @@ document.querySelector('.modal_close').addEventListener('click',closeDialog);
 function generateCard(card){
    return  `<li class="card"><i class="fa ${card}"></i></li>`;
 }
-
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -113,6 +76,20 @@ function initGame(){
     resetClockAndTime(); 
     resetStars();
 }
+// Strat the Game
+function startGame()
+  {
+    const clickTarget = event.target;
+    if (isClickValid(clickTarget)){
+         toggleCard(clickTarget); 
+    addToggleCard(clickTarget);
+    if (toggledCards.length === 2) {
+        checkForMatch(clickTarget);     
+        checkScore();
+        addMove();     
+        }
+    }
+  }
 //refresh the game
 function resetGame(){
     initGame();
@@ -141,21 +118,21 @@ function resetMoves(){
 }
 //reset the stars
 function resetStars(){
-    stars = 0;
+    let stars = 0;
     const starList = document.querySelectorAll('.stars li');
-    for (star of starList){
+    for (let star of starList){
         star.style.display = 'inline';
     }
 }
 //shuffle the deck
-function shuffleDeck(){
+/*function shuffleDeck(){
     const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
     const shuffledCrads = shuffle(cardsToShuffle);
     console.log('Shuffled Cards',shuffledCrads);
-    for (card of shuffledCrads){
+    for (let card of shuffledCrads){
         deck.appendChild(card);
         }
-}
+}*/
 //add the no: of moves
 function addMove(){
     moves++;
@@ -177,7 +154,7 @@ function checkScore(){
 }
 //start the clock
 function startClock(){
-    time =0;
+    //let time =0;
     clockId = setInterval(() =>{ time++;
     displayTime(); 
     },1000); 
@@ -225,7 +202,7 @@ function writeModalStats(){
 function getStars(){
     stars = document.querySelectorAll('.stars li');
     starCount = 0;
-    for (star of stars){
+    for (let star of stars){
         if (star.style.display !== 'none'){
             starCount++;
         }
